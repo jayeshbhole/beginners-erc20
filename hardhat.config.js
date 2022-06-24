@@ -22,10 +22,37 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
+  solidity: "0.8.7",
   networks: {
+    localhost: {
+      allowUnlimitedContractSize: true,
+      url: "http://localhost:8545",
+      accounts: [process.env.PRIVATE_KEY],
+    },
+    hardhat: {
+      allowUnlimitedContractSize: true,
+      // forking: {
+      //   enabled: true,
+      //   url: "", // Mainnet
+      //   blockNumber: 1,
+      // },
+      accounts: [
+        {
+          privateKey: process.env.PRIVATE_KEY,
+          balance: "10000000000000000000000000000000000000000000000000",
+        },
+      ],
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    goerli: {
+      url: process.env.GOERLI_URL || "",
+      accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    mumbai: {
+      url: process.env.MUMBAI_URL || "",
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
   },
@@ -34,6 +61,11 @@ module.exports = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      mainnet: process.env.ETHERSCAN_API_KEY,
+      goerli: process.env.ETHERSCAN_API_KEY,
+      polygonMumbai: process.env.POLYSCAN_API_KEY,
+      polygon: process.env.POLYSCAN_API_KEY,
+    },
   },
 };
