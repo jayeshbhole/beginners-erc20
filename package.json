@@ -23,6 +23,10 @@
     "solidity-coverage": "^0.7.21"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.6.0"
+    "@maticnetwork/maticjs": "^3.3.0",
+    "@maticnetwork/maticjs-ethers": "^1.0.2",
+    "@maticnetwork/maticjs-web3": "^1.0.1",
+    "@openzeppelin/contracts": "^4.6.0",
+    "@truffle/hdwallet-provider": "^2.0.9"
   }
 }
